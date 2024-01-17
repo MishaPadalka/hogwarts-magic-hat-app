@@ -20,40 +20,48 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Center(
-          child: BlocConsumer<SplashScreenCubit, SplashScreenState>(listener: (context, state) {
-            if (state is SplashScreenLoaded) {
-              router.pushReplacementNamed(RoutePath.home);
-            }
-            // TODO: implement listener
-          }, builder: (context, state) {
-            if (state is SplashScreenLoading) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 104,
-                child: SvgPicture.asset(
-                  AppImages.logo,
-                  colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                ),
-              );
-            }
-            if (state is SplashScreenError) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(state.errorMessage),
-                  ElevatedButton(
-                      onPressed: () async {
-                        await context.read<SplashScreenCubit>().getCharacters();
-                      },
-                      child: const Text('Try again'))
-                ],
-              );
-            }
-            return Container();
-          }),
+          child: BlocConsumer<SplashScreenCubit, SplashScreenState>(
+            listener: (context, state) {
+              if (state is SplashScreenRedirectToHomeScreen) {
+                router.pushReplacementNamed(RoutePath.home);
+              }
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              if (state is SplashScreenLoading) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  width: double.infinity,
+                  height: 104,
+                  child: SvgPicture.asset(
+                    AppImages.logo,
+                    colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                  ),
+                );
+              }
+              if (state is SplashScreenError) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(state.errorMessage),
+                    ElevatedButton(
+                        onPressed: () async {
+                          await context.read<SplashScreenCubit>().getCharacters();
+                        },
+                        child: const Text('Try again'))
+                  ],
+                );
+              }
+              return Container();
+            },
+            buildWhen: (previous, current) => _isBuildState(current),
+          ),
         ),
       ),
     );
+  }
+
+  bool _isBuildState(SplashScreenState state) {
+    return state is SplashScreenLoading || state is SplashScreenError;
   }
 }

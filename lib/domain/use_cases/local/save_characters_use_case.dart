@@ -4,11 +4,11 @@ import 'package:hogwarts_magic_hat_app/data/repositories/characters_repository.d
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class GetCharactersUseCase {
+class SaveCharactersUseCase {
   final CharactersRepository charactersRepository;
 
-  GetCharactersUseCase(this.charactersRepository);
+  SaveCharactersUseCase(this.charactersRepository);
 
-  Future<ResponseModel<List<CharacterLocalModel>>> execute() =>
-      charactersRepository.getCharacters();
+  Future<ResponseModel<void>> execute(List<CharacterLocalModel> localCharacters) =>
+      charactersRepository.saveCharacters(localCharacters);
 }

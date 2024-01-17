@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:hogwarts_magic_hat_app/data/models/character_model.dart';
-import 'package:hogwarts_magic_hat_app/data/models/network_response_model.dart';
+import 'package:hogwarts_magic_hat_app/data/mapper/remote_character_mapper.dart';
+import 'package:hogwarts_magic_hat_app/data/models/local_models/character_local_model.dart';
+import 'package:hogwarts_magic_hat_app/data/models/remote_models/character_model.dart';
+import 'package:hogwarts_magic_hat_app/data/models/remote_models/response_model.dart';
 import 'package:hogwarts_magic_hat_app/presentation/shared/constants.dart';
 import 'package:injectable/injectable.dart';
 
@@ -22,7 +24,7 @@ class NetworkManagerImpl {
 
   NetworkManagerImpl(this.dioManager);
 
-  Future<NetworkResponseModel<List<CharacterModel?>>> getCharacters() async {
+  Future<ResponseModel<List<CharacterLocalModel>>> getCharacters() async {
     try {
       var response = await dioManager.dio.get(AppConstants.characters);
       final r = response.data;
@@ -31,9 +33,9 @@ class NetworkManagerImpl {
       for (final character in r) {
         l.add(CharacterModel.fromJson(character));
       }
-      return NetworkResponseModel(result: l);
+      return ResponseModel(result: mapListCharacterModelToListCharacterLocalModel(l));
     } on DioException catch (e) {
-      return NetworkResponseModel(
+      return ResponseModel(
         errorMessage: e.message,
         isError: true,
       );

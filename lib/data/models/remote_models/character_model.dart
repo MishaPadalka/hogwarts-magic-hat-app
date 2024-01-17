@@ -1,4 +1,4 @@
-import 'package:hogwarts_magic_hat_app/data/models/wand_model.dart';
+import 'package:hogwarts_magic_hat_app/data/models/remote_models/wand_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'character_model.g.dart';

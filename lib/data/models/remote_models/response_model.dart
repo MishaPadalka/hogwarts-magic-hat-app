@@ -1,9 +1,9 @@
-class NetworkResponseModel<T> {
+class ResponseModel<T> {
   final T? result;
   final String? errorMessage;
   final bool isError;
 
-  NetworkResponseModel({
+  ResponseModel({
     this.result,
     this.errorMessage,
     this.isError = false,

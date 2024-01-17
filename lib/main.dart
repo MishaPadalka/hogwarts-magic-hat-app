@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:hogwarts_magic_hat_app/data/boxes/boxes.dart';
+import 'package:hogwarts_magic_hat_app/data/models/local_models/character_local_model.dart';
 import 'package:hogwarts_magic_hat_app/tools/di/injection.dart';
 import 'package:hogwarts_magic_hat_app/tools/router.dart';
 
-void main() {
+import 'data/models/local_models/wand_local_model.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  await Hive.initFlutter();
+  Hive.registerAdapter(WandLocalModelAdapter());
+  Hive.registerAdapter(CharacterLocalModelAdapter());
+
+  charactersBox = await Hive.openBox<CharacterLocalModel>('charactersBox');
   runApp(const MyApp());
 }
 
