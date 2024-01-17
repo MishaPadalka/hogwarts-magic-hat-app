@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hogwarts_magic_hat_app/tools/di/injection.dart';
 import 'package:hogwarts_magic_hat_app/tools/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 

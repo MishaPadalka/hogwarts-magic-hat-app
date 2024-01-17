@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hogwarts_magic_hat_app/presentation/screens/home_screen/home_screen.dart';
+import 'package:hogwarts_magic_hat_app/presentation/screens/splash_screen/splash_screen_cubit/splash_screen_cubit.dart';
 
 import 'router_export.dart';
 
@@ -16,8 +19,11 @@ final GoRouter router = GoRouter(
           path: '/',
           name: RoutePath.splash,
           pageBuilder: (context, state) {
-            return const MaterialPage(
-              child: SplashScreen(),
+            return MaterialPage(
+              child: BlocProvider(
+                create: (context) => GetIt.instance.get<SplashScreenCubit>(),
+                child: const SplashScreen(),
+              ),
             );
           },
           routes: [
