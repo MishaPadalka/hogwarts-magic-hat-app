@@ -24,7 +24,7 @@ CharacterModel _$CharacterModelFromJson(Map<String, dynamic> json) =>
       hairColour: json['hairColour'] as String?,
       wand: json['wand'] == null
           ? null
-          : Wand.fromJson(json['wand'] as Map<String, dynamic>),
+          : WandModel.fromJson(json['wand'] as Map<String, dynamic>),
       patronus: json['patronus'] as String?,
       hogwartsStudent: json['hogwartsStudent'] as bool?,
       hogwartsStaff: json['hogwartsStaff'] as bool?,

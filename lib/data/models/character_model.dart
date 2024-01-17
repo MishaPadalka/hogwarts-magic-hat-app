@@ -30,7 +30,7 @@ class CharacterModel {
   @JsonKey(name: 'hairColour')
   String? hairColour;
   @JsonKey(name: 'wand')
-  Wand? wand;
+  WandModel? wand;
   @JsonKey(name: 'patronus')
   String? patronus;
   @JsonKey(name: 'hogwartsStudent')

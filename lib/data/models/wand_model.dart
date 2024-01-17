@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'wand_model.g.dart';
 
 @JsonSerializable()
-class Wand {
+class WandModel {
   @JsonKey(name: 'wood')
   String? wood;
   @JsonKey(name: 'core')
@@ -11,9 +11,9 @@ class Wand {
   @JsonKey(name: 'length')
   double? length;
 
-  Wand({this.wood, this.core, this.length});
+  WandModel({this.wood, this.core, this.length});
 
-  factory Wand.fromJson(Map<String, dynamic> json) => _$WandFromJson(json);
+  factory WandModel.fromJson(Map<String, dynamic> json) => _$WandModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WandToJson(this);
+  Map<String, dynamic> toJson() => _$WandModelToJson(this);
 }

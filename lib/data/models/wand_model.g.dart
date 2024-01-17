@@ -6,13 +6,13 @@ part of 'wand_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Wand _$WandFromJson(Map<String, dynamic> json) => Wand(
+WandModel _$WandModelFromJson(Map<String, dynamic> json) => WandModel(
       wood: json['wood'] as String?,
       core: json['core'] as String?,
       length: (json['length'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$WandToJson(Wand instance) => <String, dynamic>{
+Map<String, dynamic> _$WandModelToJson(WandModel instance) => <String, dynamic>{
       'wood': instance.wood,
       'core': instance.core,
       'length': instance.length,
