@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hogwarts_magic_hat_app/data/models/local_models/character_local_model.dart';
@@ -27,7 +29,23 @@ class LocalManagerImpl {
 
   Future<bool> isBoxEmpty() async {
     _charactersBox = await Hive.openBox<CharacterLocalModel>('characters');
-    _charactersBox.clear();
     return _charactersBox.isEmpty;
+  }
+
+  Future<ResponseModel<CharacterLocalModel?>> getRandomCharacter() async {
+    try {
+      var rng = Random();
+      int index = rng.nextInt(_charactersBox.length);
+      CharacterLocalModel? c = _charactersBox.getAt(index);
+      return ResponseModel(
+        result: c,
+        isError: false,
+      );
+    } catch (e) {
+      return ResponseModel(
+        errorMessage: e.toString(),
+        isError: true,
+      );
+    }
   }
 }

@@ -18,4 +18,6 @@ class CharactersRepository {
       localManager.saveCharacters(localCharacters);
 
   Future<bool> isBoxEmpty() => localManager.isBoxEmpty();
+  Future<ResponseModel<CharacterLocalModel?>> getRandomCharacter() => localManager.getRandomCharacter();
+
 }

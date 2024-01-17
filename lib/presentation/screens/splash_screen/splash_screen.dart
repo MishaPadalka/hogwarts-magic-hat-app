@@ -23,9 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
           child: BlocConsumer<SplashScreenCubit, SplashScreenState>(
             listener: (context, state) {
               if (state is SplashScreenRedirectToHomeScreen) {
-                router.pushReplacementNamed(RoutePath.home);
+                router.go('/${RoutePath.home}');
               }
-              // TODO: implement listener
             },
             builder: (context, state) {
               if (state is SplashScreenLoading) {
