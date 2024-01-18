@@ -31,8 +31,16 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(child: widget.navigationShell),
-        bottomNavigationBar: SizedBox(
-          height: 90,
+        bottomNavigationBar: Container(
+          height: MediaQuery.of(context).size.height * 0.08,
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Colors.black, // Change the color of the top line
+                width: 1.0, // Adjust the thickness of the top line
+              ),
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Row(
